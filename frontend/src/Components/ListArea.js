@@ -1,10 +1,9 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import EntryList from "./EntryList";
+import { EntryList } from "./EntryList";
 import { TaskList } from "./TaskList";
 
-const ListArea = ({ taskList, switchTask }) => {
-  console.log(taskList);
+const ListArea = ({ taskList, switchTask, handleOnCheck, ids }) => {
   const entryList = taskList.filter(({ type }) => type === "entry");
 
   const badList = taskList.filter(({ type }) => type === "bad");
@@ -21,6 +20,9 @@ const ListArea = ({ taskList, switchTask }) => {
             arrow="right"
             list={entryList}
             switchTask={switchTask}
+            handleOnCheck={handleOnCheck}
+            name="entry"
+            ids={ids}
           />
         </Col>
         <Col>
@@ -28,6 +30,9 @@ const ListArea = ({ taskList, switchTask }) => {
             title="BadTaskList"
             switchTask={switchTask}
             list={badList}
+            handleOnCheck={handleOnCheck}
+            name="bad"
+            ids={ids}
           />
 
           <div className="text-end text-danger fw-bold">
