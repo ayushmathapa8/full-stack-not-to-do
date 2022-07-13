@@ -1,0 +1,1 @@
+## Not to do full stack app with MERN
