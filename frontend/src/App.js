@@ -35,7 +35,9 @@ function App() {
       );
     }
     const result = await postTask(task);
-    console.log(result, "hjhgjkhihg");
+  console.log(result)
+    
+    result.status === "success" && getTaskFromServer()
   };
 
   const switchTask = async (_id, type) => {

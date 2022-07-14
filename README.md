@@ -1,1 +1,1 @@
-## Not to do full stack app with MERN
+## Not to do full stack app with MERN stack

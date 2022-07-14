@@ -1,8 +1,11 @@
+import "dotenv/config"
 import express from "express";
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 import helmet from "helmet";
 import cors from "cors";
+import path from 'path';
+
 
 // middlewares
 app.use(express.json());
@@ -14,18 +17,26 @@ import { dbConnect } from "./src/config/dbConfig.js";
 dbConnect();
 
 import taskRouter from "./src/routers/taskRouter.js";
+import { CLIENT_RENEG_LIMIT } from "tls";
 app.use("/api/v1/task", taskRouter);
 
-app.use("/", (req, res) => {
-  res.json({
-    status: "success", // either success or error
-    messsage: "you have reached not to do api",
-  });
+
+
+
+// static content serve
+
+const __dirname = path.resolve()
+app.use(express.static(path.join(__dirname,"/frontend/build")))
+
+
+app.use("/", (req,res) =>{
+  res.sendFile(path.join(__dirname, "/frontend/build/index.html"));
 });
+
 
 app.use((error, req, res, next) => {
   //   const status = error.status || 404;
-
+console.log(error)
   res.json({
     status: "error",
     messsage: error.message,

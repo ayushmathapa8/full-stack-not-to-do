@@ -33,15 +33,12 @@ router.post("/", async (req, res, next) => {
     // call db query to store data in the db
     const result = await insterTask(req.body);
 
-    console.log(result);
+   
     res.json({
       status: "success", // either success or error
       messsage: "The new task has been added",
     });
-    res.json({
-      status: "error", // either success or error
-      messsage: "Error,unable to add new task",
-    });
+    
   } catch (error) {
     next(error);
   }
